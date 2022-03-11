@@ -2,7 +2,7 @@ package com.progressoft.tools;
 
 import java.math.BigDecimal;
 
-public class Imp_ScoringSummery implements ScoringSummary{
+public class ScoringSummeryImpl implements ScoringSummary{
     BigDecimal  Stand_div,Mean,Variance,Median,Min,Max;
 
     public void setMean(BigDecimal mean) {

@@ -20,7 +20,7 @@ public class NormalizerTest {
     @BeforeEach
     public void beforeEach() {
         // TODO override it here
-        normalizer = new Min_Z_Score();
+        normalizer = new NormalizerImpl();
     }
 
     public Normalizer normalizer() {
