@@ -20,7 +20,7 @@ public class NormalizerTest {
     @BeforeEach
     public void beforeEach() {
         // TODO override it here
-        normalizer = null;
+        normalizer = new Min_Z_Score();
     }
 
     public Normalizer normalizer() {
@@ -58,7 +58,7 @@ public class NormalizerTest {
         copyFile("/marks.csv", csvPath);
         Assertions.assertTrue(Files.exists(csvPath));
 
-        Normalizer normalizer = normalizer();
+        Normalizer normalizer = extracted();
         ScoringSummary summary = normalizer.zscore(csvPath, destPath, columnName);
         Assertions.assertNotNull(summary, "the returned summary is null");
 
@@ -88,7 +88,7 @@ public class NormalizerTest {
         copyFile("/employees.csv", csvPath);
         Assertions.assertTrue(Files.exists(csvPath));
 
-        Normalizer normalizer = normalizer();
+        Normalizer normalizer = extracted();
         ScoringSummary summary = normalizer.zscore(csvPath, destPath, columnName);
         Assertions.assertNotNull(summary, "the returned summary is null");
 
@@ -138,7 +138,7 @@ public class NormalizerTest {
         copyFile("/marks.csv", csvPath);
         Assertions.assertTrue(Files.exists(csvPath));
 
-        Normalizer normalizer = normalizer();
+        Normalizer normalizer = extracted();
         ScoringSummary summary = normalizer.minMaxScaling(csvPath, destPath, columnName);
         Assertions.assertNotNull(summary, "the returned summary is null");
 
@@ -168,7 +168,7 @@ public class NormalizerTest {
         copyFile("/employees.csv", csvPath);
         Assertions.assertTrue(Files.exists(csvPath));
 
-        Normalizer normalizer = normalizer();
+        Normalizer normalizer = extracted();
         ScoringSummary summary = normalizer.minMaxScaling(csvPath, destPath, columnName);
         Assertions.assertNotNull(summary, "the returned summary is null");
 
@@ -186,6 +186,11 @@ public class NormalizerTest {
         Path assertionPath = copyFile("/employees_mm.csv", induction.resolve("employees_mm.csv"));
         List<String> expectedLines = Files.readAllLines(assertionPath);
         assertLines(expectedLines, generatedLines);
+    }
+
+    private Normalizer extracted() {
+        Normalizer normalizer = normalizer();
+        return normalizer;
     }
 
     private final Path copyFile(String resource, Path path) throws IOException {
